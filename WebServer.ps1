@@ -4,7 +4,7 @@ Configuration WebServer
     param($environment)
     Import-DscResource –ModuleName 'xPSDesiredStateConfiguration'
     Import-DscResource -ModuleName 'xWebAdministration'
-    Import-DscResource –ModuleName 'CengageCompositeResources'
+    Import-DscResource –ModuleName 'CompositeResources'
 
     $splunkIndex = $ConfigurationData.NonNodeData.EnvironmentConfigurations[$environment].Splunk.Web
     $dynatraceHostGroup = $ConfigurationData.NonNodeData.EnvironmentConfigurations[$environment].Dynatrace.HostGroup
@@ -15,7 +15,7 @@ Configuration WebServer
     $InputsConf = $inputsConfTemplate -replace "#{Splunk:Index}", $splunkIndex
     $octopusEnvironments = @($environment)
     Node $configurationName {
-        CengageWebHost NormalWebHostConfig {
+        WebHost NormalWebHostConfig {
             FileContents = $configurationName
         }
         Package UrlRewrite {
