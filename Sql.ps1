@@ -15,7 +15,7 @@ Configuration Sql
     [WinEventLog://System]
     index = #{Splunk:Index}" -replace "#{Splunk:Index}", $splunkIndex
     
-    [PSCredential] $DomCredential = Get-VaultPsCredential "secret/platform-operations/dsc/sqlAccounts/legacySqlAccount"
+    [PSCredential] $DomCredential = Get-VaultPsCredential "vault/topfolder/subfolder/...."
 
     Node $configurationName {
         CengageAdministrators admins {
@@ -25,7 +25,7 @@ Configuration Sql
         CengageSqlHost SqlHostConfig {
             ConfigurationName = $ConfigurationName
             DomCredential     = $DomCredential
-            DependsOn         = "[CengageAdministrators]admins"
+            DependsOn         = "securitygroup"
             TCPPort           = 1433
         }
         CengageMonitoring cengageMonitoring {
