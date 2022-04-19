@@ -37,13 +37,13 @@ Configuration WebServer
             DependsOn           = "CompositeConfig", "[Package]UrlRewrite"
         }
         if ($developerAccess) {
-            CengageAdministrators extraAdmin {
+            Administrators extraAdmin {
                 ConfigurationName   = $configurationName
                 ExtraAdministrators = "domain\securitygroup"
             }
         }
         else {
-            CengageAdministrators DefaultAdmins {
+            Administrators DefaultAdmins {
                 ConfigurationName = $configurationName
             }
         }
