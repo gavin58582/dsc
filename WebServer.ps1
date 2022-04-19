@@ -24,22 +24,22 @@ Configuration WebServer
             Name       = "IIS URL Rewrite Module 2"
             Path       = "http://download.microsoft.com/download/D/D/E/DDE57C26-C62C-4C59-A1BB-31D58B36ADA2/rewrite_amd64_en-US.msi"
             Arguments  = '/quiet'
-            ProductId  = "38D32370-3A31-40E9-91D0-D236F47E3C4A"
-            DependsOn  = "[CengageWebHost]NormalWebHostConfig"
+            ProductId  = "#####"
+            DependsOn  = "CompositeConfig"
             ReturnCode = @(0, 1603)
         }
         CengageOctopus octopus {
             OctopusEnvironments = $octopusEnvironments
-            Space               = "NGLSync"
+            Space               = "Name
             Roles               = @("WebServer")
-            Tenants             = "AWS"
-            TenantTags          = "Hosting/AWS"
-            DependsOn           = "[CengageWebHost]NormalWebHostConfig", "[Package]UrlRewrite"
+            Tenants             = "TenantName"
+            TenantTags          = "TagName"
+            DependsOn           = "CompositeConfig", "[Package]UrlRewrite"
         }
         if ($developerAccess) {
             CengageAdministrators extraAdmin {
                 ConfigurationName   = $configurationName
-                ExtraAdministrators = "awsweb\NGLSync Developers"
+                ExtraAdministrators = "domain\securitygroup"
             }
         }
         else {
