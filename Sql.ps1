@@ -3,7 +3,7 @@ Configuration Sql
 {
     param($environment)
     Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
-    Import-DscResource -ModuleName 'CengageCompositeResources'
+    Import-DscResource -ModuleName CompositeResources'
     Import-DscResource -ModuleName 'NetworkingDsc' -ModuleVersion 8.1.0
     $splunkIndex = $ConfigurationData.NonNodeData.EnvironmentConfigurations[$environment].Splunk.Web
     $dynatraceHostGroup = $ConfigurationData.NonNodeData.EnvironmentConfigurations[$environment].Dynatrace.HostGroup
@@ -18,17 +18,17 @@ Configuration Sql
     [PSCredential] $DomCredential = Get-VaultPsCredential "vault/topfolder/subfolder/...."
 
     Node $configurationName {
-        CengageAdministrators admins {
+        Administrators admins {
             ExtraAdministrators = $DomCredential.UserName
             ConfigurationName   = $configurationName
         }
-        CengageSqlHost SqlHostConfig {
+        SqlHost SqlHostConfig {
             ConfigurationName = $ConfigurationName
             DomCredential     = $DomCredential
             DependsOn         = "securitygroup"
             TCPPort           = 1433
         }
-        CengageMonitoring cengageMonitoring {
+        Monitoring Monitoring {
             SentinelOneSite    = "cloud"
             SentinelOneGroup   = "default"
             DynatraceHostGroup = $dynatraceHostGroup
