@@ -28,7 +28,7 @@ Configuration WebServer
             DependsOn  = "CompositeConfig"
             ReturnCode = @(0, 1603)
         }
-        CengageOctopus octopus {
+         octopus {
             OctopusEnvironments = $octopusEnvironments
             Space               = "Name
             Roles               = @("WebServer")
@@ -48,7 +48,7 @@ Configuration WebServer
             }
         }
 
-        CengageMonitoring cengageMonitoring {
+        SentinelOne  {
             SentinelOneSite    = "cloud"
             SentinelOneGroup   = "default"
             DynatraceHostGroup = $dynatraceHostGroup
