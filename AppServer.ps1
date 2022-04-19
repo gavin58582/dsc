@@ -16,10 +16,10 @@ Configuration AppServer
     Node $configurationName {
         CengageOctopus octopus {
             OctopusEnvironments = $octopusEnvironments
-            Space               = "NGLSync"
+            Space               = "NAME"
             Roles               = @("AppServer")
-            Tenants             = "AWS"
-            TenantTags          = "Hosting/AWS"
+            Tenants             = "TenantName"
+            TenantTags          = "EnvironmentTag"
         }
         CengageWebHost NormalWebHostConfig {
             FileContents = $configurationName
@@ -33,7 +33,7 @@ Configuration AppServer
         }
         if ($developerAccess) {
             CengageAdministrators extraAdmin {
-                ExtraAdministrators = "awsweb\NGLSync Developers"
+                ExtraAdministrators = "domain\securitygroup"
                 ConfigurationName   = $configurationName
             }
         }
